@@ -1,0 +1,200 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 220 16% 18%;
+    --foreground: 210 36% 94%;
+    --card: 220 14% 22%;
+    --card-foreground: 210 40% 96%;
+    --popover: 220 14% 22%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 160 84% 50%;
+    --primary-foreground: 220 20% 10%;
+    --secondary: 220 12% 24%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 220 12% 24%;
+    --muted-foreground: 215 24% 62%;
+    --accent: 160 84% 50%;
+    --accent-foreground: 220 20% 10%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 10% 28%;
+    --input: 220 10% 28%;
+    --ring: 160 84% 50%;
+    --chart-1: 160 84% 50%;
+    --chart-2: 200 80% 60%;
+    --chart-3: 38 92% 50%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --radius: 0.75rem;
+    --sidebar-background: 220 14% 22%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 160 84% 50%;
+    --sidebar-primary-foreground: 220 20% 7%;
+    --sidebar-accent: 220 14% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 220 13% 18%;
+    --sidebar-ring: 160 84% 50%;
+    --success: 160 84% 50%;
+    --success-foreground: 220 20% 7%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 220 20% 7%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Themed scrollbars: thin, silver/grey to match dark theme */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(220 10% 38%) hsl(220 12% 20%);
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-track {
+    background: hsl(220 12% 20%);
+  }
+  *::-webkit-scrollbar-thumb {
+    background: hsl(220 10% 38%);
+    border-radius: 3px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: hsl(220 10% 48%);
+  }
+
+  /* Subtle reddish tint when danger/scam is detected */
+  .theme-danger {
+    --background: 0 25% 16%;
+    --card: 0 20% 20%;
+    --border: 0 15% 28%;
+  }
+  .theme-danger .sleek-card {
+    background: hsl(0 20% 20% / 0.65);
+    border-color: hsl(0 18% 28% / 0.45);
+  }
+}
+
+/* Circular waveform pulse */
+@keyframes ring-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+@keyframes ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow-breathe {
+  0%, 100% {
+    box-shadow: 0 0 20px hsl(160 84% 50% / 0.15);
+  }
+  50% {
+    box-shadow: 0 0 40px hsl(160 84% 50% / 0.3);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bar-dance {
+  0%, 100% {
+    height: 8px;
+  }
+  50% {
+    height: var(--bar-height, 32px);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.animate-ring-pulse {
+  animation: ring-pulse 2s ease-in-out infinite;
+}
+
+.animate-ring-spin {
+  animation: ring-spin 8s linear infinite;
+}
+
+.animate-glow-breathe {
+  animation: glow-breathe 3s ease-in-out infinite;
+}
+
+.animate-bar-dance {
+  animation: bar-dance 1s ease-in-out infinite;
+}
+
+/* Sleek card style — soft glow, no hard border */
+.sleek-card {
+  background: hsl(220 14% 22% / 0.65);
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(220 10% 28% / 0.45);
+  box-shadow:
+    0 0 0 1px hsl(220 10% 28% / 0.08),
+    0 4px 24px hsl(0 0% 0% / 0.25),
+    0 1px 3px hsl(0 0% 0% / 0.15);
+  transition: box-shadow 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+}
+
+.sleek-card:hover {
+  border-color: hsl(160 84% 50% / 0.18);
+  box-shadow:
+    0 0 0 1px hsl(160 84% 50% / 0.06),
+    0 8px 40px hsl(0 0% 0% / 0.45),
+    0 0 60px hsl(160 84% 50% / 0.06);
+  transform: translateY(-2px);
+}
+
+/* Lighter inner card for nested sections */
+.sleek-card-inner {
+  background: hsl(220 12% 26% / 0.55);
+  border: 1px solid hsl(220 10% 28% / 0.35);
+  box-shadow: 0 2px 8px hsl(0 0% 0% / 0.1);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.sleek-card-inner:hover {
+  background: hsl(220 12% 28% / 0.75);
+  border-color: hsl(220 10% 28% / 0.5);
+}
